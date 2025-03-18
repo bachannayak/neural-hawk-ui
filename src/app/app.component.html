@@ -1,0 +1,43 @@
+<div class="main-content">
+  <mat-toolbar color="primary">
+    <span class="logo-text">
+      <img src="assets/NeuralHawk.png" alt="Neural-Hawk Logo" class="logo-img"> 
+      Neural-Hawk
+    </span>
+    <span class="spacer"></span>
+  
+    <!-- Search Bar -->
+    <mat-form-field appearance="outline" class="search-bar">
+      <input matInput placeholder="What are you looking for..." [(ngModel)]="searchQuery">
+      <button matSuffix mat-icon-button (click)="onSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  
+    <!-- Toolbar Links -->
+    <span class="toolbar-link" [ngClass]="{'active-link': activePage === ''}" (click)="setActivePage('')">Home</span>
+  
+    <!-- User Profile Dropdown -->
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="myAccount()">My Account</button>
+      <button mat-menu-item (click)="contact()">Contact</button>
+    </mat-menu>
+  </mat-toolbar>
+  
+
+    <div class="router-outlet-content">
+      <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>© 2025 Neural-Hawk</p>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+  </div>
+</footer>

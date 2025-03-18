@@ -1,0 +1,109 @@
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 60px; /* Define a fixed height */
+  background-color: rgb(244, 242, 247);
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-link {
+  margin: 0 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+.logo-text {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.logo-img {
+  height: 60px; /* Adjust size as needed */
+  width: auto;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+  
+
+.router-outlet-content{
+  padding-bottom: 60px;
+  padding-top: 60px;
+}
+
+
+
+
+/* Search Bar */
+.search-bar {
+  height: 45px; /* Match the default height of mat-toolbar */
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 450px; /* Adjust width as needed */
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.search-bar .mat-form-field-wrapper {
+  height: 100%;
+}
+
+.search-bar .mat-form-field-flex {
+  height: 100%;
+  align-items: center;
+}
+
+.search-bar .mat-form-field-infix {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+
+/* Shopping Cart Icon */
+.mat-icon-button {
+  margin-left: 10px;
+}
+
+/* User Profile Dropdown */
+.mat-menu-item {
+  color: #3f51b5;
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f87bad;
+  color: rgb(40, 5, 5) ;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
+  height: 50px; /* Define a fixed height */
+}
+
+/* Footer content */
+.footer-content {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+
