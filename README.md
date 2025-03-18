@@ -1,6 +1,7 @@
-# Retail-ROBO
+# Neural-Hawk
 
-![image](https://github.com/user-attachments/assets/2fdf7d1e-4d3d-4bed-9fd1-7dcab6f83750)
+![image](https://github.com/user-attachments/assets/c348f78d-11e0-4a3d-aa54-aafdb092c78d)
+
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
