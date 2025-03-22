@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="registration-title">Registration Form</div>
+    <div class="row registration-css">
+        <form [formGroup]="RegistrationForm" (ngSubmit)="registrationSubmit()">
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-3">
+                    <label for="name" class="form-label" style="font-weight: 600;">Name: </label>
+                    <input type="text" class="form-control" formControlName="name" id="name" />
+                    <p *ngIf="RegistrationForm.get('name')?.hasError('required') && RegistrationForm.get('name')?.dirty">Name is need!!</p>
+                </div>
+                <div class="col-md-3">
+                    <label for="date" class="form-label" style="font-weight: 600;">Date of Bith: </label>
+                    <input type="date" class="form-control" formControlName="dob" name="dob" />
+                </div>
+                <div class="col-md-3">
+                    <label for="phoneno" class="form-label" style="font-weight: 600;">Phone Number: </label>
+                    <input type="number" class="form-control" formControlName="phoneno" name="phoneno" />
+                    <p *ngIf="RegistrationForm.get('phoneno')?.hasError('required') && RegistrationForm.get('phoneno')?.dirty">Phone number is needed!!</p>
+                    <p *ngIf="RegistrationForm.get('phoneno')?.hasError('pattern')">Phone number not valid!!!</p>
+                </div>
+                <div class="col-md-3">
+                    <label for="govtidcard" class="form-label" style="font-weight: 600;">Goverment Id Card: </label>
+                    <input type="text" class="form-control" formControlName="govtidcard" id="govtidcard" />
+                    <p *ngIf="RegistrationForm.get('govtidcard')?.hasError('required') && RegistrationForm.get('govtidcard')?.dirty">Goverment id card is need!!</p>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-3">
+                    <label for="accounttype" class="form-label" style="font-weight: 600;">Account Type: </label>
+                    <select class="form-control" name="accounttype" id="accounttype" formControlName="accounttype">
+                        <option value="" disabled>---Select---</option>
+                        <option *ngFor="let account of accountTypeData" [value]="account">{{account}}</option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="address" class="form-label" style="font-weight: 600;">Address: </label>
+                    <textarea formControlName="address" class="form-control" name="address" id="address"></textarea>
+                    <p *ngIf="RegistrationForm.get('address')?.hasError('required') && RegistrationForm.get('address')?.dirty">Address is needed!!</p>
+                </div>
+                <div class="col-md-3">
+                    <label for="state" class="form-label" style="font-weight: 600;">State: </label>
+                    <input type="text" class="form-control" name="state" formControlName="state" id="state"/>
+                </div>
+                <div class="col-md-3">
+                    <label for="pincode" class="form-label" style="font-weight: 600;">Pincode: </label>
+                    <input type="number" class="form-control" formControlName="pincode" name="pincode" />
+                    <p *ngIf="RegistrationForm.get('pincode')?.hasError('required') && RegistrationForm.get('pincode')?.dirty">Pincode needed!!</p>
+                    <p *ngIf="RegistrationForm.get('pincode')?.hasError('pattern')">Pincode not valid!!!</p>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-4">
+                    <label for="photo" class="form-label" style="font-weight: 600;">Photo Upload: </label>
+                    <input type="file" class="form-control" name="photo" formControlName="photo" id="photo" (change)="onFileSelected($event)" />
+                    <div class="photo-radi-div">
+                        <div>
+                            <input type="radio" name="category" /><label style="font-weight: 500;">Use Gallery</label>
+                            <input type="radio" name="category" data-toggle="modal" data-target="#exampleModal" (change)="openCameraModal()" style="position: relative; left: 10px;" /><label style="font-weight: 500; position: relative; left: 10px;">Use Camera</label>
+                        </div>
+                    </div>
+                    <div style="color: green;" *ngIf="photoUploadSuccess !== ''">{{photoUploadSuccess}}</div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; position: relative; top: 25px;">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="loading"></div>
+      <!-- The Modal Success -->
+    <div class="modal" id="successModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeSuccessModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div style="color: green; font-weight: 700; font-size: 20px;"> Registration success!! </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeSuccessModal()">Close</button>
+            </div>
+     
+          </div>
+        </div>
+      </div>
+ 
+  <!-- The Modal Camera -->
+  <div class="modal" id="cameraModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCameraModal()"></button>
+        </div>
+        <div class="modal-body">
+            <div>
+                <webcam [height]="500" [width]="450" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                [videoOptions]="videoOptions"
+                [imageQuality]="1"
+                (cameraSwitched)="cameraWasSwitched($event)"
+                (initError)="handleInitError($event)"
+                ></webcam>
+                <div>
+                    <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label for="cameraSwitchCheckbox">Allow Camera</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeCameraModal()">Close</button>
+          <button class="btn btn-primary actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
